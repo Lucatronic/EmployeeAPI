@@ -1,4 +1,4 @@
-# **Employees Api**
+# **Employee Api**
 
 ## _Documentation_
 
@@ -30,23 +30,23 @@ docker logs <container-id>
 
 Use the following endpoints to get or create the resources whatever you want.
 
-##### baseUrl = http://localhost:3002/api
+##### baseUrl = http://localhost:3000/api
 
 | Method | URL |
 | ------ | ------ |
-| GET | {{baseUrl}}/movies |
-| GET | {{baseUrl}}/movies/:movieId |
-| POST | {{baseUrl}}/movies |
-| PUT | {{baseUrl}}/movies/:movieId |
-| DELETE | {{baseUrl}}/movies/:movieId |
-| POST | {{baseUrl}}/register |
+| GET | {{baseUrl}}/v1/employees |
+| GET | {{baseUrl}}/v1/employees/:employeeId |
+| POST | {{baseUrl}}/v1/employees |
+| PATCH | {{baseUrl}}/v1/employees/:employeeId |
+| DELETE | {{baseUrl}}/v1/employees/:employeeId |
+| POST | {{baseUrl}}/v1/register |
 
 To be able to create, update or delete a resource, it is necessary to register an user. Use the following endpoint:
-##### | POST | {{baseUrl}}/register |
+##### | POST | {{baseUrl}}/v1/register |
 You can register an user with data that you want.
 {
     "email": "someone@gmail.com",
-    "password": "mysupersecretpassword"
+    "password": "mypassword"
 }
 
 After creating an user, you need to take the accessToken and use it as a header to create, update and delete information. (Authorization Bearer <token>).
@@ -55,12 +55,18 @@ On the other hand, you can filter data using query strings.
 
 | Method | URL |
 | ------ | ------ |
-| GET | {{baseUrl}}/movies |
-| GET | {{baseUrl}}/movies?title=American |
-| GET | {{baseUrl}}/movies?genre=Drama |
-| GET | {{baseUrl}}/movies?title=Equalizer&genre=Action |
+| GET | {{baseUrl}}/v1/employees |
+| GET | {{baseUrl}}/v1/employees?departamento=Desarrollo |
+
+## Swagger
+
+#### Version 1 Docs are available at http://localhost:3000/api/v1/docs
+
+http://localhost:3000/api/v1/docs/
 
 ## Postman Collection
 
-https://elements.getpostman.com/redirect?entityId=20453127-26c43f38-030d-4456-ad33-e010d42319c4&entityType=collection
+In the following link you can find the postman collection for API tests:
+
+#### Postman Collection: https://elements.getpostman.com/redirect?entityId=20453127-26c43f38-030d-4456-ad33-e010d42319c4&entityType=collection
 
