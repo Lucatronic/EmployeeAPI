@@ -38,6 +38,7 @@ const getOneEmployee = async (req, res) => {
 };
 
 const createNewEmployee = async (req, res) => {
+  console.log("createNewEmployee");
   const { body } = req;
 
   console.log("body:");
@@ -96,21 +97,21 @@ const updateOneEmployee = async (req, res) => {
   }
 };
 
-const deleteOneWorkout = async (req, res) => {
+const deleteOneEmployee = async (req, res) => {
   const {
-    params: { workoutId },
+    params: { employeeId },
   } = req;
 
-  if (!workoutId) {
+  if (!employeeId) {
     res.status(400).send({
       status: "FAILED",
-      data: { error: "Parameter ':workoutId' can not be empty" },
+      data: { error: "Parameter ':employeeId' can not be empty" },
     });
   }
 
   try {
     console.log("Ok0");
-    if (await employeeService.deleteOneWorkout(workoutId)) {
+    if (await employeeService.deleteOneEmployee(employeeId)) {
       console.log("Ok1");
       res.status(204).send({ status: "OK" });
       console.log("Ok2");
@@ -128,5 +129,5 @@ module.exports = {
   getOneEmployee,
   createNewEmployee,
   updateOneEmployee,
-  deleteOneWorkout,
+  deleteOneEmployee,
 };

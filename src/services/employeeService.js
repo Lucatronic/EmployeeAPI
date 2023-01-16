@@ -49,9 +49,9 @@ const updateOneEmployee = async (employeeId, changes) => {
   }
 };
 
-const deleteOneWorkout = async (workoutId) => {
+const deleteOneEmployee = async (workoutId) => {
   try {
-    return await Employee.deleteOneWorkout(workoutId);
+    return await Employee.deleteOneEmployee(workoutId);
   } catch (error) {
     throw error;
   }
@@ -62,5 +62,5 @@ module.exports = {
   getOneEmployee,
   createNewEmployee,
   updateOneEmployee,
-  deleteOneWorkout,
+  deleteOneEmployee,
 };

@@ -127,7 +127,6 @@ const createNewEmployee = (newEmployee) => {
 const updateOneEmployee = (employeeId, changes) => {
   try {
 
-
     return new Promise((resolve, reject) => {
       const updatedEmployee = {
         employeeId,
@@ -151,48 +150,16 @@ const updateOneEmployee = (employeeId, changes) => {
         });
     });
 
-
-    const isAlreadyAdded =
-      DB.workouts.findIndex((workout) => workout.name === changes.name) > -1;
-
-    if (isAlreadyAdded) {
-      throw {
-        status: 400,
-        message: `Workout with the name '${changes.name}' already exists`,
-      };
-    }
-
-    const indexForUpdate = DB.workouts.findIndex(
-      (workout) => workout.id === employeeId
-    );
-
-    if (indexForUpdate === -1) {
-      throw {
-        status: 400,
-        message: `Can't find workout with the id '${employeeId}'`,
-      };
-    }
-
-    const updatedWorkout = {
-      ...DB.workouts[indexForUpdate],
-      ...changes,
-      updatedAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
-    };
-
-    DB.workouts[indexForUpdate] = updatedWorkout;
-    saveToDatabase(DB);
-
-    return updatedWorkout;
   } catch (error) {
     throw { status: error?.status || 500, message: error?.message || error };
   }
 };
 
-const deleteOneWorkout = (workoutId) => {
+const deleteOneEmployee = (employeeId) => {
   try {
 
     return new Promise((resolve, reject) => {
-      db.run('DELETE FROM empleado WHERE id = ?', workoutId, function (err) {
+      db.run('DELETE FROM empleado WHERE id = ?', employeeId, function (err) {
           if (err) {
             reject({ status: 500, message: err.message });
           }
@@ -201,31 +168,6 @@ const deleteOneWorkout = (workoutId) => {
         });
     });
     
-    db.run('DELETE FROM empleado WHERE id = ?', workoutId, function (err) {
-      if (err) {
-        throw {
-          status: 500,
-          message: err.message,
-        };
-      }
-      console.log("Entry deleted");
-    });
-
-    /*
-    
-
-
-    const indexForDeletion = DB.workouts.findIndex(
-      (workout) => workout.id === workoutId
-    );
-    if (indexForDeletion === -1) {
-      throw {
-        status: 400,
-        message: `Can't find workout with the id '${workoutId}'`,
-      };
-    }
-    DB.workouts.splice(indexForDeletion, 1);
-    saveToDatabase(DB);*/
   } catch (error) {
     throw { status: error?.status || 500, message: error?.message || error };
   }
@@ -236,5 +178,5 @@ module.exports = {
   getOneEmployee,
   createNewEmployee,
   updateOneEmployee,
-  deleteOneWorkout,
+  deleteOneEmployee,
 };

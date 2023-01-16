@@ -1,7 +1,6 @@
 const express = require("express");
 const employeeController = require("../../controllers/employeeController");
-const recordController = require("../../controllers/recordController");
-const { updateOneEmployee } = require("../../database/Employee");
+const auth = require("../../middlewares/auth");
 
 const router = express.Router();
 
@@ -49,11 +48,10 @@ const router = express.Router();
  *                       type: string
  *                       example: "Some error message"
  */
-router.get("/", employeeController.getAllEmployees)
-router.get("/:employeeId", employeeController.getOneEmployee)
-router.get("/:workoutId/records", recordController.getRecordForWorkout)
-router.post("/", employeeController.createNewEmployee)
-router.patch("/:employeeId", employeeController.updateOneEmployee)
-router.delete("/:workoutId", employeeController.deleteOneWorkout);
+router.get("/", employeeController.getAllEmployees);
+router.get("/:employeeId", employeeController.getOneEmployee);
+router.post("/", auth, employeeController.createNewEmployee);
+router.patch("/:employeeId", employeeController.updateOneEmployee);
+router.delete("/:employeeId", employeeController.deleteOneEmployee);
 
 module.exports = router;
