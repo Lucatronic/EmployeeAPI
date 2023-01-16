@@ -61,7 +61,7 @@ const createNewEmployee = async (req, res) => {
 
   try {
     const createdEmployee = await employeeService.createNewEmployee(newEmployee);
-    res.status(201).send({ status: "OK", data: createdEmployee });
+    res.status(201).send({ status: "CREATED", data: createdEmployee });
   } catch (error) {
     res
       .status(error?.status || 500)

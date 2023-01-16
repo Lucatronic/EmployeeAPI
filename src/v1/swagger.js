@@ -4,10 +4,37 @@ const swaggerUi = require("swagger-ui-express");
 // Metadata info about our API
 const options = {
   definition: {
-    openapi: "3.0.0",
-    info: { title: "Crossfit WOD API", version: "1.0.0" },
+    openapi: "3.0.1",
+    info: {
+      title: "Employee API", 
+      version: "1.0.0",
+      description:
+        `This is a REST API application made with NodeJS and Express. 
+        It retrieves data from a local SQLite database.
+        To be able to create, update or delete a resource, it is necessary to register an user.
+        Copy the access token, then click the "Authorize" button and then enter the token.`,
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        }
+      }
+    },
+    servers: [
+      {
+        url: 'http://localhost:3000',
+        description: 'Development server',
+      },
+    ],
   },
-  apis: ["src/v1/routes/workoutRoutes.js", "src/database/Workout.js"],
+  apis: [
+    "src/v1/routes/employeeRoutes.js",
+    "src/v1/routes/registerRoutes.js",
+    "src/database/Employee.js"
+  ],
 };
 
 // Docs en JSON format

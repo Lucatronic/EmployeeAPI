@@ -26,7 +26,7 @@ const db = new sqlite3.Database(db_name, err => {
  *         telefono:
  *           type: string
  *           example: +595994234853
- *         departamente:
+ *         departamento:
  *           type: string
  *           example: Desarrollo
  *         createdAt:
@@ -120,7 +120,7 @@ const updateOneEmployee = (employeeId, changes) => {
 
     return new Promise((resolve, reject) => {
       const updatedEmployee = {
-        employeeId,
+        id: employeeId,
         ...changes,
         updatedAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
       };
