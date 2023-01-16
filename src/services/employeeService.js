@@ -4,8 +4,6 @@ const Employee = require("../database/Employee");
 const getAllEmployees = async (filterParams) => {
   try {
     const allEmployees = await Employee.getAllEmployees(filterParams);
-    //console.log("allEmployees in Service:");
-    //console.log(allEmployees);
     return allEmployees;
   } catch (error) {
     throw error;
@@ -29,11 +27,7 @@ const createNewEmployee = async (newEmployee) => {
     updatedAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
   };
   try {
-    console.log("employeeToInsert:");
-    console.log(employeeToInsert);
     const createdEmployee = await Employee.createNewEmployee(employeeToInsert);
-    console.log("createdEmployee:");
-    console.log(createdEmployee);
     return createdEmployee;
   } catch (error) {
     throw error;
@@ -49,9 +43,9 @@ const updateOneEmployee = async (employeeId, changes) => {
   }
 };
 
-const deleteOneEmployee = async (workoutId) => {
+const deleteOneEmployee = async (employeeId) => {
   try {
-    return await Employee.deleteOneEmployee(workoutId);
+    return await Employee.deleteOneEmployee(employeeId);
   } catch (error) {
     throw error;
   }

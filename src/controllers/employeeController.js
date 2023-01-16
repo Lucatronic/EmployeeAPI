@@ -4,8 +4,6 @@ const getAllEmployees = async (req, res) => {
   const { departamento } = req.query;
   try {
     const allEmployees = await employeeService.getAllEmployees({ departamento });
-    console.log("allEmployees in Controller:");
-    console.log(allEmployees);
     res.send({ status: "OK", data: allEmployees });
   } catch (error) {
     res
@@ -38,11 +36,7 @@ const getOneEmployee = async (req, res) => {
 };
 
 const createNewEmployee = async (req, res) => {
-  console.log("createNewEmployee");
   const { body } = req;
-
-  console.log("body:");
-  console.log(body);
 
   if (
     !body.nombre ||
@@ -56,6 +50,7 @@ const createNewEmployee = async (req, res) => {
           "One of the following keys is missing or is empty in request body: 'nombre', 'telefono', 'departamento'",
       },
     });
+    return;
   }
 
   const newEmployee = {
@@ -85,6 +80,7 @@ const updateOneEmployee = async (req, res) => {
       status: "FAILED",
       data: { error: "Parameter ':employeeId' can not be empty" },
     });
+    return;
   }
 
   try {
@@ -107,14 +103,12 @@ const deleteOneEmployee = async (req, res) => {
       status: "FAILED",
       data: { error: "Parameter ':employeeId' can not be empty" },
     });
+    return;
   }
 
   try {
-    console.log("Ok0");
     if (await employeeService.deleteOneEmployee(employeeId)) {
-      console.log("Ok1");
       res.status(204).send({ status: "OK" });
-      console.log("Ok2");
     }
 
   } catch (error) {

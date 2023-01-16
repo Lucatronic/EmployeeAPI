@@ -1,5 +1,3 @@
-const DB = require("./db.json");
-
 const path = require("path");
 const sqlite3 = require('sqlite3').verbose();
 const db_name = path.join(__dirname, "base.db");
@@ -11,8 +9,6 @@ const db = new sqlite3.Database(db_name, err => {
   }
 })
 
-
-const { saveToDatabase } = require("./utils");
 
 /**
  * @openapi
@@ -52,15 +48,10 @@ const getAllEmployees = (filterParams) => {
         param = [filterParams.departamento]
       }
 
-      //console.log("SQL:");
-      //console.log(sql);
-
       db.all(sql, param, (err, rows) => {
         if (err) {
           reject({ status: 500, message: err.message });
         }
-        //console.log("rows:");
-        //console.log(rows);
         resolve(rows);
       });
     });
@@ -85,7 +76,7 @@ const getOneEmployee = (employeeId) => {
 
         if (!row) {
           reject({
-            status: 400,
+            status: 404,
             message: `Can't find employee with the id '${employeeId}'`,
           });
         }
@@ -145,8 +136,17 @@ const updateOneEmployee = (employeeId, changes) => {
           if (err) {
             reject({ status: 500, message: err.message });
           }
-          console.log("Entry updated successfully");
-          resolve(updatedEmployee);
+
+          console.log(`Row(s) updated: ${this.changes}`);
+          if (this.changes > 0) {
+            resolve(updatedEmployee);
+          } else {
+            reject({
+              status: 400,
+              message: `Can't find employee with the id '${employeeId}'`,
+            });
+          }
+          
         });
     });
 
@@ -163,8 +163,16 @@ const deleteOneEmployee = (employeeId) => {
           if (err) {
             reject({ status: 500, message: err.message });
           }
-          console.log("Entry deleted");
-          resolve(true);
+
+          console.log(`Row(s) deleted: ${this.changes}`);
+          if (this.changes > 0) {
+            resolve(true);
+          } else {
+            reject({
+              status: 404,
+              message: `Can't find employee with the id '${employeeId}'`,
+            });
+          }
         });
     });
     

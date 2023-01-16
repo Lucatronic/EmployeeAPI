@@ -1,4 +1,4 @@
-# **Crossfit Wod Api**
+# **Employees Api**
 
 ## How to run the app with docker:
 
@@ -18,3 +18,8 @@ docker ps #Copy the container id
 docker logs <container-id>
 
 ```
+
+## Postman Collection
+
+https://elements.getpostman.com/redirect?entityId=20453127-26c43f38-030d-4456-ad33-e010d42319c4&entityType=collection
+
