@@ -14,10 +14,10 @@ npm start
 ```bash
 
 #Create the image with node
-docker build . -t employee-api-node
+docker build . -t employee-api
 
 #Starts the container with the API image
-docker run -p 3000:3000 -d employee-api-node
+docker run -p 3000:3000 -d employee-api
 
 #After that the app runs on the port 3000. To check it: 
 docker ps #Copy the container id
