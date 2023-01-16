@@ -1,8 +1,8 @@
 FROM node:alpine
 
-RUN mkdir /crossfit-wod-api
+RUN mkdir /employee-api
 
-WORKDIR /crossfit-wod-api
+WORKDIR /employee-api
 
 COPY package*.json ./
 

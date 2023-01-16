@@ -174,6 +174,8 @@ router.post("/", auth, employeeController.createNewEmployee);
 * @swagger
 * /api/v1/employees/{id}:
 *   patch:
+*     security:
+*       - bearerAuth: []
 *     tags:
 *       - Employee
 *     summary: Update a single employee.
@@ -252,6 +254,8 @@ router.patch("/:employeeId", auth, employeeController.updateOneEmployee);
 * @swagger
 * /api/v1/employees/{id}:
 *   delete:
+*     security:
+*       - bearerAuth: []
 *     tags:
 *       - Employee
 *     summary: Delete a single employee.
